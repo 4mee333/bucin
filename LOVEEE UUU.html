@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Untukmu, Sayangku 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      opacity: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      z-index: 2;
+      position: relative;
+      transition: opacity 1s ease-in-out;
+    }
+
+    p {
+      font-size: 1.4em;
+      margin: 10px 0;
+      opacity: 0;
+      position: relative;
+      z-index: 2;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .line1 { transition-delay: 0.5s; }
+    .line2 { transition-delay: 1.5s; }
+    .line3 { transition-delay: 2.5s; }
+    .line4 { transition-delay: 3.5s; }
+
+    .heart {
+      font-size: 4em;
+      animation: beat 1s infinite;
+      margin-top: 30px;
+      z-index: 2;
+      position: relative;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    /* Animasi jatuh */
+    .falling-heart, .falling-flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh); opacity: 0; }
+    }
+
+    /* Bunga tumbuh menjulang */
+    .growing-flower {
+      position: absolute;
+      bottom: 0;
+      font-size: 50px;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      animation: grow 3s ease-out forwards;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    @keyframes grow {
+      0% { transform: scaleY(0); opacity: 0; }
+      50% { transform: scaleY(1.2); opacity: 1; }
+      100% { transform: scaleY(1); }
+    }
+
+    /* Tombol Mulai di tengah layar */
+    .start-button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff6b81;
+      color: white;
+      cursor: pointer;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .start-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <h1 id="title">Untukmu, Cintaku 💕</h1>
+  <p class="line1">Kamu adalah semangatku setiap hari ✨</p>
+  <p class="line2">Jangan pernah menyerah, aku selalu di sisimu 🌸</p>
+  <p class="line3">Kamu itu istimewa, lebih dari yang kamu bayangkan 💎</p>
+  <p class="line4">Aku mencintaimu selamanya ❤️</p>
+
+  <div class="heart">💖</div>
+
+  <button class="start-button" id="startBtn">Mulai 💌</button>
+
+  <script>
+    const title = document.getElementById("title");
+    const lines = document.querySelectorAll("p");
+    const heart = document.querySelector(".heart");
+    const startBtn = document.getElementById("startBtn");
+
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none";
+
+      // tampilkan teks
+      title.style.opacity = 1;
+      lines.forEach(line => line.style.opacity = 1);
+      heart.style.opacity = 1;
+    });
+
+    // Fungsi buat hati jatuh
+    function createHeart() {
+      const heartF = document.createElement("div");
+      heartF.classList.add("falling-heart");
+      const size = 20 + Math.random() * 30;
+      heartF.style.fontSize = size + "px";
+      heartF.style.left = Math.random() * 100 + "vw";
+      heartF.style.animationDuration = (3 + Math.random() * 2) + "s";
+      heartF.style.opacity = Math.random() * 0.7 + 0.3;
+      heartF.innerText = "💖";
+      document.body.appendChild(heartF);
+      setTimeout(() => heartF.remove(), 5000);
+    }
+
+    // Fungsi buat bunga jatuh
+    function createFlower() {
+      const flowers = ["🌸","🌷","🌹","🌼","💐"];
+      const flower = document.createElement("div");
+      flower.classList.add("falling-flower");
+      const size = 20 + Math.random() * 25;
+      flower.style.fontSize = size + "px";
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.animationDuration = (4 + Math.random() * 3) + "s";
+      flower.style.opacity = Math.random() * 0.7 + 0.3;
+      flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 6000);
+    }
+
+    // Fungsi buat bunga tumbuh tinggi
+    function createGrowingFlower() {
+      const flowers = ["🌸","🌷","🌹","🌼","💐"];
+      const flower = document.createElement("div");
+      flower.classList.add("growing-flower");
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }
+
+    // Interval animasi
+    setInterval(createHeart, 800);
+    setInterval(createFlower, 1000);
+    setInterval(createGrowingFlower, 1800);
+  </script>
+</body>
+</html>
